@@ -19,6 +19,7 @@ defmodule Samacare.Posts.Follow do
     follow
     |> cast(attrs, [:deleted_at, :follower_id, :followee_id])
     |> validate_required([:follower_id, :followee_id])
+    |> unique_constraint(:follower, name: :follows_followee_id_follower_id_index)
     # |> validate_required([:deleted_at])
   end
 end

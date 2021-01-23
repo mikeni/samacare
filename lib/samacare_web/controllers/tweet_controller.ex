@@ -6,13 +6,13 @@ defmodule SamacareWeb.TweetController do
 
   action_fallback SamacareWeb.FallbackController
 
-  def index(conn, _params) do
-    tweets = Posts.list_tweets()
+  def index(conn, params) do
+    tweets = Posts.list_tweets(params)
     render(conn, "index.json", tweets: tweets)
   end
 
   def create(conn, %{"tweet" => tweet_params}) do
-    tweet_params = Map.merge(tweet_params, %{"tweeted_at" => DateTime.utc_now})
+    # tweet_params = Map.merge(tweet_params, %{"tweeted_at" => DateTime.utc_now})
     with {:ok, %Tweet{} = tweet} <- Posts.create_tweet(tweet_params) do
       conn
       |> put_status(:created)

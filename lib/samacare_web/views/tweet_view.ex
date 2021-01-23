@@ -14,6 +14,6 @@ defmodule SamacareWeb.TweetView do
     %{id: tweet.id,
       message: tweet.message,
       private: tweet.private,
-      tweeted_at: tweet.tweeted_at}
+      inserted_at: tweet.inserted_at}
   end
 end

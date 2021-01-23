@@ -6,7 +6,7 @@ defmodule Samacare.Posts.Tweet do
   schema "tweets" do
     field :message, :string
     field :private, :boolean, default: false
-    field :tweeted_at, :utc_datetime_usec
+    # field :tweeted_at, :utc_datetime_usec
     # field :author_id, :id
     belongs_to :author, User, references: :id
 
@@ -16,7 +16,8 @@ defmodule Samacare.Posts.Tweet do
   @doc false
   def changeset(tweet, attrs) do
     tweet
-    |> cast(attrs, [:message, :private, :tweeted_at, :author_id])
-    |> validate_required([:message, :tweeted_at, :author_id])
+    |> cast(attrs, [:message, :private, :author_id])
+    |> validate_required([:message, :author_id])
+    |> validate_length(:message, min: 1, max: 140)
   end
 end

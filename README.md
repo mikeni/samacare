@@ -50,3 +50,24 @@ curl -XPOST 'http://localhost:4000/api/tweets' \
 }
 EOF
 ```
+
+GET all Tweets
+```
+curl -XGET 'http://localhost:4000/api/tweets' \
+-H "Content-type: application/json"
+```
+
+GET all Tweets between two datetime
+```
+curl -XGET 'http://localhost:4000/api/tweets?start_at=1642898756&end_at=1642896820' \
+-H "Content-type: application/json"
+
+curl -XGET 'http://localhost:4000/api/tweets?start_at=1642898756' \
+-H "Content-type: application/json"
+```
+
+GET all Tweets from publishers
+```
+curl -XGET 'http://localhost:4000/api/tweets?publishers=' \
+-H "Content-type: application/json"
+```

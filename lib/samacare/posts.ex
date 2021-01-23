@@ -5,6 +5,7 @@ defmodule Samacare.Posts do
 
   import Ecto.Query, warn: false
   alias Samacare.Repo
+  require IEx
 
   alias Samacare.Posts.User
 
@@ -209,8 +210,33 @@ defmodule Samacare.Posts do
       [%Tweet{}, ...]
 
   """
-  def list_tweets do
-    Repo.all(Tweet)
+  def list_tweets(params) do
+    query = from t in Tweet,
+    as: :tweet
+
+    query = case params do
+      %{"start_at" => start_at} ->
+        start_at_datetime = start_at
+        |> String.to_integer
+        |> DateTime.from_unix!
+
+        from [tweet: tweet] in query,
+        where: tweet.inserted_at > ^start_at_datetime
+      _ -> query
+    end
+
+    query = case params do
+      %{"end_at" => end_at} ->
+        end_at_datetime = end_at
+        |> String.to_integer
+        |> DateTime.from_unix!
+
+        from [tweet: tweet] in query,
+        where: tweet.inserted_at > ^end_at_datetime
+      _ -> query
+    end
+
+    Repo.all(query)
   end
 
   @doc """
