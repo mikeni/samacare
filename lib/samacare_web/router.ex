@@ -26,6 +26,10 @@ defmodule SamacareWeb.Router do
 
     resources "/test_reds", TestRedController, except: [:new, :edit]
     resources "/test_greens", TestGreenController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/follows", FollowController, except: [:new, :edit]
+    resources "/tweets", TweetController, except: [:new, :edit]
+
   end
 
   # Enables LiveDashboard only for development

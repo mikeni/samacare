@@ -9,12 +9,44 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
+Creating a User
+```
+curl -XPOST 'http://localhost:4000/api/users' \
+-H "Content-type: application/json" \
+-d @- << EOF
+{
+  "user": {
+    "name": "Michael Ni"
+  }
+}
+EOF
+```
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+Creating a Follow
+```
+curl -XPOST 'http://localhost:4000/api/follows' \
+-H "Content-type: application/json" \
+-d @- << EOF
+{
+  "follow": {
+    "follower_id": 1,
+    "followee_id": 2
+  }
+}
+EOF
+```
+
+Creating a Tweet
+```
+curl -XPOST 'http://localhost:4000/api/tweets' \
+-H "Content-type: application/json" \
+-d @- << EOF
+{
+  "tweet": {
+    "message": "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+    "author_id": 1
+  }
+}
+EOF
+```
